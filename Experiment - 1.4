@@ -1,0 +1,41 @@
+import java.util.Scanner;
+
+public class BasicBankingSystem {
+
+    public static void main(String[] args) {
+        double[] accountBalances = {5500.0, 1200.0, 4300.0, 9800.0, 2500.0};
+        String[] transactionIds = {"TX123", "TX456", "TX789", "TX101", "TX202"};
+
+        try {
+            double totalBalance = 0;
+            int numberOfAccountHolders = accountBalances.length;
+
+            for (double balance : accountBalances) {
+                totalBalance += balance;
+            }
+
+            if (numberOfAccountHolders == 0) {
+                throw new ArithmeticException("Cannot calculate average, no account holders present.");
+            }
+            double averageBalance = totalBalance / numberOfAccountHolders;
+            System.out.println("Average Account Balance: " + averageBalance);
+        } catch (ArithmeticException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+
+        Scanner scanner = new Scanner(System.in);
+        try {
+            System.out.print("Enter the index of the transaction ID you want to verify: ");
+            int index = scanner.nextInt();
+
+            String transactionId = transactionIds[index];
+            System.out.println("Transaction ID at index " + index + " is: " + transactionId);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Error: Invalid index for transaction ID.");
+        } catch (Exception e) {
+            System.out.println("An unexpected error occurred: " + e.getMessage());
+        } finally {
+            scanner.close();
+        }
+    }
+}
